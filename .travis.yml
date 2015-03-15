@@ -1,0 +1,18 @@
+language: c++
+compiler: g++
+
+before_install:
+  - git submodule update --init --recursive
+  - make test
+  - make python
+  - sudo pip install cpp-coveralls
+script:
+  - LD_LIBRARY_PATH=libtap ./test
+  - PYTHONPATH=. python tests/test.py
+after_success:
+  - coveralls --exclude usr --exclude tests/test.cpp  --exclude ReedSolomon/main.cpp --exclude ReedSolomon/ReedSolomon.h --exclude data --exclude libtap --gcov-options '\-lp'
+  - make clean
+  - make 
+  - time ./reedSolomon e data/rand32m.dat
+  - ./ReedSolomon m
+  - time ./reedSolomon d data/rand32m.dat

@@ -4,7 +4,7 @@
 # Reed-Solomon Coding with Interleaving
 This is a library for Reed-Solomon Coding with Interleaving , available as a C program and python module.
 
-About Reed-Solomon coding, please refer [Reed–Solomon codes for coders](http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders).
+About Reed-Solomon coding, please refer to [Reed–Solomon codes for coders](http://en.wikiversity.org/wiki/Reed%E2%80%93Solomon_codes_for_coders).
 
 For interleaving, data will be considered as K x (interleaving length) matrix (interleaving length= (file size % K)+1).
 Then Reed Solomon coding is adapted to each column, and add parity bits to the end of column.
@@ -59,7 +59,7 @@ If you are using Python, you can use `encodeFile()` to test for coding, or you c
     errLoc=[12342,1323,1662,11344] #list of error location in file
     reedSolomon.dencodeFile(infile_path,outfile_path,200,208,size,errLoc)
 
-Refer [here](https://rawgit.com/StorjPlatform/ReedSolomon/master/doc/html/class_reed_solomon.html) for using in library.
+Refer to [here](https://rawgit.com/StorjPlatform/ReedSolomon/master/doc/html/reedSolomon.html) for using as Python library.
 
 ## Performance
 

@@ -9,8 +9,8 @@ before_install:
   - make test
   - make python
   - sudo pip install cpp-coveralls
+  - sudo apt-get -qq update
   - sudo apt-get install valgrind
-  - sudo pip install cpp-coveralls
   
 script:
   - LD_LIBRARY_PATH=libtap ./test

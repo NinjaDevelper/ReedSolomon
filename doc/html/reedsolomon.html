@@ -1,0 +1,169 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>reedsolomon module &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/bizstyle.js"></script>
+    <link rel="top" title=".  documentation" href="index.html" />
+    <link rel="prev" title="Welcome to .’s documentation!" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to .’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to .&#8217;s documentation!</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/reedsolomon.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-reedsolomon">
+<span id="reedsolomon-module"></span><h1>reedsolomon module<a class="headerlink" href="#module-reedsolomon" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="reedsolomon.decode_file">
+<code class="descclassname">reedsolomon.</code><code class="descname">decode_file</code><span class="sig-paren">(</span><em>in_file</em>, <em>out_file</em>, <em>k</em>, <em>n</em>, <em>size</em>, <em>err_loc</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/reedsolomon.html#decode_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reedsolomon.decode_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decode file that coded by Reed-Solomon codes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>in_file</strong> (<em>str</em>) &#8211; file name that you wan to decode.</li>
+<li><strong>out_file</strong> (<em>str</em>) &#8211; file name that you wan to output.</li>
+<li><strong>k</strong> (<em>int</em>) &#8211; amount of original data.</li>
+<li><strong>n</strong> (<em>int</em>) &#8211; total number of symbols after the erasure coding</li>
+<li><strong>size</strong> (<em>long</em>) &#8211; file size of original file (not encoded file)</li>
+<li><strong>err_loc</strong> (<em>list</em>) &#8211; error location in bytes in file.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">0 is success. others for error.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="reedsolomon.encode_file">
+<code class="descclassname">reedsolomon.</code><code class="descname">encode_file</code><span class="sig-paren">(</span><em>orig_file</em>, <em>encoded_file</em>, <em>k</em>, <em>n</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/reedsolomon.html#encode_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#reedsolomon.encode_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Encode file by Reed-Solomon codes with interleaving.</p>
+<p>For interleaving, data will be considered as K x (interleaving length) matrix
+(interleaving length= (file size % K)+1).
+Then Reed Solomon coding is adapted to each column, and add parity bits to 
+the end of column.</p>
+<p>For example, RS(K=200,N=208) is used to 1,000,000 bytes data, 
+which means interleaving length=5,000
+so you can recover data even if you cannot download sequential 5,000*8 bytes.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>orig_file</strong> (<em>str</em>) &#8211; file name that you wan to encode.</li>
+<li><strong>encoded_file</strong> (<em>str</em>) &#8211; file name that you wan to output.</li>
+<li><strong>k</strong> (<em>int</em>) &#8211; amount of original data.</li>
+<li><strong>n</strong> (<em>int</em>) &#8211; total number of symbols after the erasure coding</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">0 is success. others for error.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to .’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">.  documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

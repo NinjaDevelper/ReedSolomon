@@ -29,39 +29,42 @@
 # POSSIBILITY OF SUCH DAMAGE.
 
 
-import os
-import filecmp
-import unittest
+#dummy for generating documents.
 
-import reedsolomon
+def encode_file(orig_file,encoded_file,k,n):
+    """
+    Encode file by Reed-Solomon codes with interleaving.
 
-class TestReedSolomon(unittest.TestCase):
-    def setUp(self):
-        pass
+    For interleaving, data will be considered as K x (interleaving length) matrix
+    (interleaving length= (file size % K)+1).
+    Then Reed Solomon coding is adapted to each column, and add parity bits to 
+    the end of column.
+     
+    For example, RS(K=200,N=208) is used to 1,000,000 bytes data, 
+    which means interleaving length=5,000
+    so you can recover data even if you cannot download sequential 5,000*8 bytes.
+    
+    :param str orig_file: file name that you wan to encode.
+    :param str encoded_file: file name that you wan to output.
+    :param int k:  amount of original data.
+    :param int n:  total number of symbols after the erasure coding
+    :return: 0 is success. others for error.
+    """
+    pass
 
-    def tearDown(self):
-        pass
 
-    def test_dencode(self):
-        r=reedsolomon.encode_file('data/rand32m.dat','encoded.dat',200,208)
+def decode_file(in_file,out_file,k,n,size,err_loc):
+    """
+    Decode file that coded by Reed-Solomon codes.
+    
+    :param str in_file: file name that you wan to decode.
+    :param str out_file: file name that you wan to output.
+    :param int k:  amount of original data.
+    :param int n:  total number of symbols after the erasure coding
+    :param long size: file size of original file (not encoded file)
+    :param list err_loc: error location in bytes in file.
+    :return: 0 is success. others for error.
+    """
+    pass
 
-        #embed sequential error
-        FROM=500000
-        COUNT=300
-        buf=bytearray(1024)
-        with open('encoded.dat','r+b') as fin:
-            fin.seek(FROM)
-            for i in range(0,COUNT):
-                fin.write(buf)
-        loc=[]
-        for i in range(0,COUNT*1024):
-            loc.append(i+FROM)
 
-        reedsolomon.decode_file('encoded.dat','recovered.dat',200,208,
-                                os.path.getsize('data/rand32m.dat'),loc)
-
-        self.assertTrue(filecmp.cmp('data/rand32m.dat','recovered.dat'),
-                        'erasure recovery test after coding')
-
-if __name__ == '__main__':
-    unittest.main()

@@ -1,7 +1,7 @@
-reedSolomon module
+reedsolomon module
 ==================
 
-.. automodule:: reedSolomon
+.. automodule:: reedsolomon
     :members:
     :undoc-members:
     :show-inheritance:

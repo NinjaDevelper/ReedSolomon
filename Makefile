@@ -1,22 +1,22 @@
-CPPFLAGS+=-Wall -IReedSolomon
+CPPFLAGS+=-Wall -Icxx
 LDFLAGS+=-lm
 
 TEST_CPPFLAGS=-fprofile-arcs -ftest-coverage  -Ilibtap -g -ggdb3
 TEST_LDFLAGS= -Llibtap -ltap 
 
-FILES=ReedSolomon/ReedSolomon.cpp ReedSolomon/ReedSolomon.h 
+FILES=cxx/ReedSolomon.cpp cxx/ReedSolomon.h 
 
 all: reedSolomon
 
-reedSolomon: ${FILES} ReedSolomon/main.cpp
-	g++ -O3 ${CPPFLAGS} -o reedSolomon ReedSolomon/ReedSolomon.cpp  ReedSolomon/main.cpp  ${LDFLAGS} 
+reedSolomon: ${FILES} cxx/main.cpp
+	g++ -O3 ${CPPFLAGS} -o reedSolomon cxx/ReedSolomon.cpp  cxx/main.cpp  ${LDFLAGS} 
 
 test: ${FILES} tests/test.cpp
 	cd libtap;make
-	g++ ${CPPFLAGS}  ${TEST_CPPFLAGS} -o test ReedSolomon/ReedSolomon.cpp  tests/test.cpp  ${LDFLAGS}   ${TEST_LDFLAGS}
+	g++ ${CPPFLAGS}  ${TEST_CPPFLAGS} -o test cxx/ReedSolomon.cpp  tests/test.cpp  ${LDFLAGS}   ${TEST_LDFLAGS}
 
-python: ${FILES} ReedSolomon/ReedSolomon_python.cpp
+python: ${FILES} cxx/ReedSolomon_python.cpp
 	python setup.py build_ext -i
 
 clean:
-	rm -f *.o  ReedSolomon/*.o reedSolomon test
+	rm -f *.o  cxx/*.o reedSolomon test

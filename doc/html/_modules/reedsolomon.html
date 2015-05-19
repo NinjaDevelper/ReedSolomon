@@ -1,0 +1,166 @@
+
+
+<!doctype html>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>reedsolomon &mdash; .  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/bizstyle.js"></script>
+    <link rel="top" title=".  documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <!--[if lt IE 9]>
+    <script type="text/javascript" src="_static/css3-mediaqueries.js"></script>
+    <![endif]-->
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">.  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for reedsolomon</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/env python</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="c"># Copyright (c) 2015, Shinya Yagyu</span>
+<span class="c"># All rights reserved.</span>
+<span class="c">#</span>
+<span class="c"># Redistribution and use in source and binary forms, with or without</span>
+<span class="c"># modification, are permitted provided that the following conditions are met:</span>
+<span class="c">#</span>
+<span class="c"># 1. Redistributions of source code must retain the above copyright notice,</span>
+<span class="c">#    this list of conditions and the following disclaimer.</span>
+<span class="c"># 2. Redistributions in binary form must reproduce the above copyright notice,</span>
+<span class="c">#    this list of conditions and the following disclaimer in the documentation</span>
+<span class="c">#    and/or other materials provided with the distribution.</span>
+<span class="c"># 3. Neither the name of the copyright holder nor the names of its contributors</span>
+<span class="c">#    may be used to endorse or promote products derived from this software</span>
+<span class="c">#    without specific prior written permission.</span>
+<span class="c">#</span>
+<span class="c"># THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot;</span>
+<span class="c"># AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE</span>
+<span class="c"># IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE</span>
+<span class="c"># ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE</span>
+<span class="c"># LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR</span>
+<span class="c"># CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF</span>
+<span class="c"># SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS</span>
+<span class="c"># INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN</span>
+<span class="c"># CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)</span>
+<span class="c"># ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE</span>
+<span class="c"># POSSIBILITY OF SUCH DAMAGE.</span>
+
+
+<span class="c">#dummy for generating documents.</span>
+
+<div class="viewcode-block" id="encode_file"><a class="viewcode-back" href="../reedsolomon.html#reedsolomon.encode_file">[docs]</a><span class="k">def</span> <span class="nf">encode_file</span><span class="p">(</span><span class="n">orig_file</span><span class="p">,</span><span class="n">encoded_file</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Encode file by Reed-Solomon codes with interleaving.</span>
+
+<span class="sd">    For interleaving, data will be considered as K x (interleaving length) matrix</span>
+<span class="sd">    (interleaving length= (file size % K)+1).</span>
+<span class="sd">    Then Reed Solomon coding is adapted to each column, and add parity bits to </span>
+<span class="sd">    the end of column.</span>
+<span class="sd">     </span>
+<span class="sd">    For example, RS(K=200,N=208) is used to 1,000,000 bytes data, </span>
+<span class="sd">    which means interleaving length=5,000</span>
+<span class="sd">    so you can recover data even if you cannot download sequential 5,000*8 bytes.</span>
+<span class="sd">    </span>
+<span class="sd">    :param str orig_file: file name that you wan to encode.</span>
+<span class="sd">    :param str encoded_file: file name that you wan to output.</span>
+<span class="sd">    :param int k:  amount of original data.</span>
+<span class="sd">    :param int n:  total number of symbols after the erasure coding</span>
+<span class="sd">    :return: 0 is success. others for error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+</div>
+<div class="viewcode-block" id="decode_file"><a class="viewcode-back" href="../reedsolomon.html#reedsolomon.decode_file">[docs]</a><span class="k">def</span> <span class="nf">decode_file</span><span class="p">(</span><span class="n">in_file</span><span class="p">,</span><span class="n">out_file</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">size</span><span class="p">,</span><span class="n">err_loc</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Decode file that coded by Reed-Solomon codes.</span>
+<span class="sd">    </span>
+<span class="sd">    :param str in_file: file name that you wan to decode.</span>
+<span class="sd">    :param str out_file: file name that you wan to output.</span>
+<span class="sd">    :param int k:  amount of original data.</span>
+<span class="sd">    :param int n:  total number of symbols after the erasure coding</span>
+<span class="sd">    :param long size: file size of original file (not encoded file)</span>
+<span class="sd">    :param list err_loc: error location in bytes in file.</span>
+<span class="sd">    :return: 0 is success. others for error.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</pre></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">.  documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2015, Author.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.3.1.
+    </div>
+  </body>
+</html>

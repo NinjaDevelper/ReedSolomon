@@ -11,7 +11,7 @@ Contents:
 .. toctree::
    :maxdepth: 4
 
-   reedSolomon
+   reedsolomon
 
 
 Indices and tables

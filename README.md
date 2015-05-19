@@ -47,19 +47,19 @@ and "d" option recovers erasure.
 
 If you are using Python, you can use `encodeFile()` to test for coding, or you can use `decodeFile()` to recover erasure:
 
-    import reedSolomon
+    import reedsolomon
     infile_path = 'data/origin.dat'
     outfile_path = 'data/encoded.dat'
-    reedSolomon.encodeFile(infile_path,outfile_path,200,208)
+    reedsolomon.encode_file(infile_path,outfile_path,200,208)
 
-    import reedSolomon
+    import reedsolomon
     infile_path = 'data/error.dat'
     outfile_path = 'data/recovered.dat'
     size=12345  #file size of origin.dat
-    errLoc=[12342,1323,1662,11344] #list of error location in file
-    reedSolomon.dencodeFile(infile_path,outfile_path,200,208,size,errLoc)
+    err_loc=[12342,1323,1662,11344] #list of error location in file
+    reedsolomon.dencode_file(infile_path,outfile_path,200,208,size,err_loc)
 
-Refer to [here](https://rawgit.com/StorjPlatform/ReedSolomon/master/doc/html/reedSolomon.html) for using as Python library.
+Refer to [here](https://rawgit.com/StorjPlatform/ReedSolomon/master/doc/html/reedsolomon.html) for using as Python library.
 
 ## Performance
 

@@ -29,6 +29,7 @@ To install the python module:
     
 To run the associated tests:
 
+    $ git submodule update --init --recursive
     $ make test
     $ LD_LIBRARY_PATH=libtap ./test
 

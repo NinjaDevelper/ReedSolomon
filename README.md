@@ -23,14 +23,14 @@ To compile the C program:
 
     $ make 
 
-To build the python module:
+To install the python module:
 
-    $ make python
+    $ python setup.py install
     
 To run the associated tests:
 
     $ make test
-    $ ./test
+    $ LD_LIBRARY_PATH=libtap ./test
 
 ## Usage
 Once installed, you can use `ReedSolomon` to encode a file to "encoded.dat".

@@ -15,8 +15,5 @@ test: ${FILES} tests/test.cpp
 	cd libtap;make
 	g++ ${CPPFLAGS}  ${TEST_CPPFLAGS} -o test cxx/ReedSolomon.cpp  tests/test.cpp  ${LDFLAGS}   ${TEST_LDFLAGS}
 
-python: ${FILES} cxx/ReedSolomon_python.cpp
-	python setup.py build_ext -i
-
 clean:
 	rm -f *.o  cxx/*.o reedSolomon test

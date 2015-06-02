@@ -27,7 +27,7 @@
 */
 
 #include <vector>
-#include "ReedSolomon.h"
+#include "ReedSolomon.hpp"
 #include <Python.h>
 
 using namespace std;

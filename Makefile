@@ -4,16 +4,18 @@ LDFLAGS+=-lm
 TEST_CPPFLAGS=-fprofile-arcs -ftest-coverage  -Ilibtap -g -ggdb3
 TEST_LDFLAGS= -Llibtap -ltap 
 
-FILES=cxx/ReedSolomon.cpp cxx/ReedSolomon.h 
-
 all: reedSolomon
 
-reedSolomon: ${FILES} cxx/main.cpp
-	g++ -O3 ${CPPFLAGS} -o reedSolomon cxx/ReedSolomon.cpp  cxx/main.cpp  ${LDFLAGS} 
+reedSolomon: cxx/ReedSolomon.cpp cxx/main.cpp
+	$(CXX) -O3 ${CPPFLAGS} -o $@ $^  ${LDFLAGS}
 
-test: ${FILES} tests/test.cpp
+test: cxx/ReedSolomon.o tests/test.o
 	cd libtap;make
-	g++ ${CPPFLAGS}  ${TEST_CPPFLAGS} -o test cxx/ReedSolomon.cpp  tests/test.cpp  ${LDFLAGS}   ${TEST_LDFLAGS}
+	$(CXX) ${CPPFLAGS}  ${TEST_CPPFLAGS} -o $@ $^  ${LDFLAGS}   ${TEST_LDFLAGS}
+
+.cpp.o:
+	$(CXX) ${CPPFLAGS}  ${TEST_CPPFLAGS} -o $@ -c $^
+
 
 clean:
 	rm -f *.o  cxx/*.o reedSolomon test

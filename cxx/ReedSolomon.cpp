@@ -35,7 +35,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 
-#include "ReedSolomon.h"
+#include "ReedSolomon.hpp"
 
 using namespace std;
 

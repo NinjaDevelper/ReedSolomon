@@ -30,7 +30,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
-#include "ReedSolomon.h"
+#include "ReedSolomon.hpp"
 
 #define FROM 500000
 #define COUNT 300

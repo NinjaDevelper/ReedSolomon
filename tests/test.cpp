@@ -33,7 +33,7 @@
 #include <math.h>
 #include <sys/mman.h>
 
-#include "ReedSolomon.h"
+#include "ReedSolomon.hpp"
 
 #define BUFFER_SIZE 65535
 int compareChunk(string fname1,string fname2){
